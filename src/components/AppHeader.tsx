@@ -2,7 +2,7 @@ import { BellIcon, LogoMark, MenuIcon } from './icons'
 import { StatusBar } from './StatusBar'
 
 type Props = {
-  /** 文字列を渡すとロゴの代わりにタイトルを表示（Figma: カレンダー画面の「レッスン予約」） */
+  /** 渡すとロゴの代わりにタイトルを表示（Figma: カレンダー画面の「レッスン予約」） */
   title?: string
   onMenu?: () => void
   onBell?: () => void
@@ -15,14 +15,14 @@ export function AppHeader({ title, onMenu, onBell }: Props) {
       <StatusBar />
       <div className="appbar__row">
         <button type="button" className="appbar__icon" onClick={onMenu} aria-label="メニューを開く">
-          <MenuIcon size={24} color="var(--color-icon)" />
+          <MenuIcon size={24} color="var(--color-ink)" />
         </button>
 
         {title ? (
           <h1 className="appbar__title">{title}</h1>
         ) : (
           <p className="logo" aria-label="LINEA">
-            <LogoMark size={32} />
+            <LogoMark size={26} />
             <span aria-hidden>LINEA</span>
           </p>
         )}
@@ -31,7 +31,7 @@ export function AppHeader({ title, onMenu, onBell }: Props) {
           <span className="appbar__icon" aria-hidden />
         ) : (
           <button type="button" className="appbar__icon" onClick={onBell} aria-label="お知らせを開く">
-            <BellIcon size={24} color="var(--color-icon)" />
+            <BellIcon size={24} color="var(--color-ink)" />
           </button>
         )}
       </div>

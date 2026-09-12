@@ -10,8 +10,8 @@ export type LessonProgram = {
   id: string
   /** レッスン名（Figma: Control Flow / Shape up Core / Refresh Core …） */
   name: string
-  /** 人気度（Figmaのハート横の数値） */
-  rating: number
+  /** 難易度。1=初階 / 2=中階 / 3=進階（仕様書 §13.3） */
+  level: 1 | 2 | 3
   description: string
   items: string[]
   /** 画像スロット名。public/images/lessons/<image>.svg を参照する */

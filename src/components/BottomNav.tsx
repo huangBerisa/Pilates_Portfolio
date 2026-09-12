@@ -17,7 +17,10 @@ const RIGHT: Item[] = [
   { tab: 'points', label: '貯める・使う', Icon: PointNavIcon },
 ]
 
-/** Figma: Navigation / Bottom (321:1741) */
+/**
+ * Figma: Navigation / Bottom (321:1741)
+ * 現在地は色・字重・上部インジケータの3点で示す（仕様書 §11 / §14）。
+ */
 export function BottomNav() {
   const { activeTab, goTab } = useBooking()
 
@@ -31,7 +34,7 @@ export function BottomNav() {
         onClick={() => goTab(tab)}
         aria-current={active ? 'page' : undefined}
       >
-        <Icon size={24} active={active} color="var(--color-primary)" />
+        <Icon size={24} />
         <span>{label}</span>
       </button>
     )
@@ -49,7 +52,7 @@ export function BottomNav() {
         onClick={() => goTab('member')}
         aria-current={activeTab === 'member' ? 'page' : undefined}
       >
-        <MemberCardIcon size={25} color="var(--color-cream)" />
+        <MemberCardIcon size={22} />
         <span>会員証</span>
       </button>
     </nav>

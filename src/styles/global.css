@@ -13,7 +13,8 @@ body {
 body {
   font-family: var(--font-jp);
   color: var(--color-ink);
-  background: #e9e4e0;
+  /* デモ台紙。端末の外側なのでアプリのパレットとは別扱い */
+  background: #ebe6e1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,7 +43,7 @@ h3 {
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* ===== 端末フレーム（デモ用の外枠。アプリ本体のデザインではない） ======
@@ -94,7 +95,7 @@ h3 {
   height: var(--device-h);
   transform: scale(var(--device-scale));
   transform-origin: top left;
-  background: var(--color-bg);
+  background: var(--color-canvas);
   border-radius: var(--device-radius);
   box-shadow: 0 24px 60px rgba(77, 69, 82, 0.24);
   overflow: hidden;
