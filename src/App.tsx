@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import { BookingProvider, useBooking } from './state/BookingContext'
+import { DEVICE, useStageFit } from './useStageFit'
 import { HomeScreen } from './screens/HomeScreen'
 import { ReserveScreen } from './screens/ReserveScreen'
 import { ConfirmScreen } from './screens/ConfirmScreen'
@@ -33,14 +35,31 @@ function Router() {
 }
 
 export default function App() {
+  const titleRef = useRef<HTMLParagraphElement>(null)
+  const { scale, fullBleed } = useStageFit(titleRef)
+
   return (
     <BookingProvider>
-      <div className="stage">
-        <p className="stage__title">
+      <div
+        className={`stage${fullBleed ? ' stage--full' : ''}`}
+        style={
+          {
+            '--device-w': `${DEVICE.width}px`,
+            '--device-h': `${DEVICE.height}px`,
+            '--device-radius': `${DEVICE.radius}px`,
+            '--device-scale': scale,
+          } as React.CSSProperties
+        }
+      >
+        <p className="stage__title" ref={titleRef}>
           <strong>LINEA</strong>
           ピラティス予約 UI 再設計プロトタイプ
+          <span className="stage__spec">iPhone 17 — 402 × 874 pt</span>
         </p>
-        <Router />
+        {/* transform で縮小するため、実際に占める面積は外側のラッパーで確保する */}
+        <div className="device-slot">
+          <Router />
+        </div>
       </div>
     </BookingProvider>
   )

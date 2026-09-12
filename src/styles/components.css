@@ -850,6 +850,8 @@ button.chip:hover {
   display: flex;
   align-items: stretch;
   background: var(--color-accent);
+  /* 端末の角丸にラベルがかからないよう左右に逃がす */
+  padding-inline: 6px;
   /* ホームインジケータぶんの余白 */
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
@@ -859,10 +861,11 @@ button.chip:hover {
   display: flex;
 }
 
-/* 中央の会員証ボタンを避ける空き（Figma: Navigation_bg 322:1757 = 79px） */
+/* 中央の会員証ボタンを避ける空き。
+   Figma は 423px 幅で 79px。基準端末の 402px 幅に合わせて比率を保つ。 */
 .bottom-nav__notch {
   flex: none;
-  width: 79px;
+  width: 75px;
 }
 
 .bottom-nav__item {
@@ -873,7 +876,7 @@ button.chip:hover {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 0 4px;
+  padding: 0 2px;
   color: var(--color-primary);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);

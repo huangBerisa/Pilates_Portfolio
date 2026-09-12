@@ -5,6 +5,8 @@ Figma で設計した「LAVAピラティス予約再設計」を、そのまま�
 
 - Figma: [LAVAピラティス予約再設計](https://www.figma.com/design/s67a1QyH2FH1rpQ4XA7Ff3/LAVA%E3%83%94%E3%83%A9%E3%83%86%E3%82%A3%E3%82%B9%E4%BA%88%E7%B4%84%E5%86%8D%E8%A8%AD%E8%A8%88)
 - 技術構成: Vite + React 18 + TypeScript + 素の CSS（CSS カスタムプロパティでトークン管理）
+- 基準端末: **iPhone 17（402 × 874 pt）**。ウィンドウに収まらないときは比率を保ったまま自動縮小し、
+  幅460px以下の実機では枠を外して全画面表示に切り替わる（`src/useStageFit.ts`）
 
 ## 動かす
 
