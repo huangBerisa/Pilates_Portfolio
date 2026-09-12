@@ -1,0 +1,74 @@
+/**
+ * Design tokens
+ * Figma: LAVAピラティス予約再設計 / file s67a1QyH2FH1rpQ4XA7Ff3
+ * 変数名はFigma上のVariable名（中国語）をそのまま英語キーに対応させている。
+ */
+:root {
+  /* ---- Color / Figma Variables ---------------------------------------- */
+  --color-ink: #4d4552;          /* 粉黑   : 本文・見出し */
+  --color-primary: #907280;      /* 深粉紫 : ブランド主色 / 主要ボタン */
+  --color-primary-border: #b79aa7; /* 粉色(枠線) : 枠線・区切り */
+  --color-accent: #f1e5e7;       /* 粉色   : 淡いアクセント面 */
+  --color-accent-deep: #eddee0;  /* 粉色(濃) : グラデーション終点 */
+  --color-surface-warm: #f1edeb; /* 淺粉灰 : 非選択セグメント面 */
+  --color-cream: #f7f4ef;        /* 米白   : 反転文字・淡背景 */
+  --color-success: #abb5a1;      /* 粉綠   : 完了・予約済 */
+  --color-icon: #222222;         /* fill_icon */
+  --color-line: #d1d1d1;         /* line_gray */
+  --color-bg: #ffffff;           /* bg_white */
+  --color-muted: #9b93a0;
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-jp: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-logo: 'Cormorant Garamond', 'Times New Roman', serif;
+
+  --text-3xl: 28px;
+  --text-2xl: 22px;
+  --text-xl: 18px;
+  --text-lg: 16px;
+  --text-md: 14px;
+  --text-sm: 12px;
+  --text-xs: 10px;
+  --text-2xs: 8px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* ---- Spacing (4pxグリッド) ------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 18px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* ---- Radius ---------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation ------------------------------------------------------- */
+  --shadow-card: 0 0 2px rgba(0, 0, 0, 0.25);
+  --shadow-card-strong: 0 0 4px rgba(0, 0, 0, 0.25);
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 140ms;
+  --duration-base: 240ms;
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --frame-width: 423px; /* Figmaアートボード幅 */
+  --gutter: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

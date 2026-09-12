@@ -1,0 +1,843 @@
+/* =====================================================================
+   Components — Figmaのノード名をコメントで対応づけている
+   ===================================================================== */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-bottom: var(--space-8);
+  background: var(--color-bg);
+  min-height: 100%;
+}
+
+.screen__tail {
+  height: var(--space-4);
+}
+
+.gutter {
+  padding-inline: var(--gutter);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.block__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.empty {
+  padding: var(--space-6) 0;
+  text-align: center;
+  font-size: var(--text-md);
+  color: var(--color-muted);
+}
+
+/* ---- StatusBar / UiLockTop (292:1734) ------------------------------- */
+.statusbar {
+  position: relative;
+  height: 30px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+  flex: none;
+}
+
+.statusbar__time {
+  font-size: 17px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.01em;
+}
+
+.statusbar__island {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 92px;
+  height: 27px;
+  border-radius: 24px;
+  background: #000;
+}
+
+.statusbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ---- AppHeader / HeadBg (335:1239) ---------------------------------- */
+.appbar {
+  padding-top: 12px;
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.appbar__row {
+  height: 52px;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.appbar__icon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.appbar__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  font-family: var(--font-logo);
+  font-size: 23.7px;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.logo svg {
+  margin-right: 2px;
+}
+
+/* ---- ReservedLessonSectionHeader (294:1573) ------------------------- */
+.reserved-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-inline: var(--gutter);
+  gap: var(--space-4);
+}
+
+.reserved-head__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.reserved-head__count {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.reserved-head__count strong {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  margin-inline: 3px;
+}
+
+/* ---- Button (123:443 / 125:491 / 291:1624) -------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: transform var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-cream);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #7f6371;
+}
+
+.btn--outline {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.btn--outline:hover:not(:disabled) {
+  background: var(--color-accent);
+}
+
+.btn--soft {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.btn--soft:hover:not(:disabled) {
+  background: var(--color-accent-deep);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn__leading {
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+/* ---- ChipsTag (167:949 / 349:1479 / 182:1411) ----------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary-border);
+  background: transparent;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.chip--selected {
+  background: var(--color-accent);
+  box-shadow: none;
+}
+
+.chip--success {
+  color: var(--color-success);
+  background: transparent;
+  box-shadow: none;
+  border: 1px dashed var(--color-success);
+  font-size: var(--text-2xs);
+  padding: 3px 15px;
+}
+
+.chip--add {
+  border: 1px dashed var(--color-primary-border);
+  box-shadow: none;
+}
+
+button.chip:hover {
+  background: var(--color-accent);
+}
+
+/* ---- SegmentedControl (113:827 / 182:1352) -------------------------- */
+.segmented {
+  display: flex;
+  width: 100%;
+}
+
+.segmented__item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 8px 10px;
+  background: var(--color-surface-warm);
+  border: 1px solid var(--color-primary-border);
+  border-inline-width: 0;
+  color: var(--color-primary);
+  font-weight: var(--weight-medium);
+  transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.segmented__item:first-child {
+  border-left-width: 1px;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.segmented__item:last-child {
+  border-right-width: 1px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.segmented__item.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary-border);
+  color: var(--color-cream);
+}
+
+.segmented__label {
+  font-size: var(--text-md);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.segmented__sub {
+  font-size: var(--text-md);
+}
+
+/* 日付タブ（ラベル18px / 補助14px）— サブ行がある場合のみ大きくする */
+.segmented__item:has(.segmented__sub) .segmented__label {
+  font-size: var(--text-xl);
+}
+
+/* ---- Filter row ------------------------------------------------------ */
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 24px;
+}
+
+.filter-row__chips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filter-row__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-row--wrap {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.link-right {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+}
+
+/* ---- WeekSelector (335:1292) ---------------------------------------- */
+.week-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 12px;
+}
+
+.week-selector__label {
+  flex: 1;
+  text-align: center;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+}
+
+.week-selector__nav {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+/* ---- DateCard (324:1792) -------------------------------------------- */
+.date-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  padding-inline: 14px;
+}
+
+.date-card {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-primary);
+  font-weight: var(--weight-medium);
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.date-card.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-cream);
+  color: var(--color-cream);
+}
+
+.date-card__label {
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+.date-card__day {
+  font-size: var(--text-lg);
+  line-height: 20px;
+}
+
+/* ---- Card / Booking Card (125:495) ---------------------------------- */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.booking-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 14px var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.booking-card__chips {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.booking-card__body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.booking-card__thumb {
+  flex: none;
+  width: 106px;
+  height: 90px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-warm);
+}
+
+.booking-card__thumb img,
+.summary__thumb img,
+.article-card__thumb img,
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.booking-card__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.booking-card__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.booking-card__rating,
+.summary__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.booking-card__meta,
+.summary__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.booking-card__meta svg,
+.summary__meta svg {
+  flex: none;
+}
+
+.booking-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.booking-card__actions .btn {
+  flex: 1;
+  padding-inline: var(--space-4);
+}
+
+/* ---- Card / Add Booking Card (210:1320) ----------------------------- */
+.add-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 198px;
+  padding: var(--space-12) var(--space-8);
+  border: 1px dashed var(--color-primary-border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-deep));
+  box-shadow: var(--shadow-card-strong);
+}
+
+.add-card__text {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+/* ---- 予約中カルーセル ------------------------------------------------- */
+.carousel {
+  display: flex;
+  gap: var(--space-4);
+  padding-inline: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__item {
+  flex: 0 0 calc(100% - var(--space-4));
+  scroll-snap-align: center;
+}
+
+/* ---- Banner / dots --------------------------------------------------- */
+.banner {
+  margin-inline: 8px;
+  height: 152px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-warm);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-line);
+}
+
+.dots span.is-active {
+  background: var(--color-primary-border);
+}
+
+/* ---- ArticleCard (290:1566) ----------------------------------------- */
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.article-card {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.article-card__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.article-card__thumb {
+  flex: none;
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-warm);
+}
+
+.article-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.article-card__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: #000;
+}
+
+.article-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.article-card__tag {
+  padding: 4px 8px;
+  border-radius: 66px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+}
+
+.article-card__date {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-line);
+}
+
+/* ---- Sheet（予約確認 / 予約完了） ------------------------------------ */
+.sheet-screen {
+  position: relative;
+  background: var(--color-bg);
+  padding-bottom: var(--space-8);
+}
+
+.sheet__head {
+  position: relative;
+}
+
+.sheet__close {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: var(--space-4);
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.sheet {
+  margin-inline: 14px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: var(--color-bg);
+}
+
+.sheet__head {
+  height: 58px;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
+}
+
+.sheet__head h1 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+}
+
+.sheet__body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--space-6);
+}
+
+.sheet__lead {
+  padding: var(--space-2) var(--space-5);
+  text-align: center;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.sheet__text {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+
+.sheet__subhead {
+  padding: var(--space-2) var(--space-5);
+  text-align: center;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.sheet__notice {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-ink);
+  white-space: pre-line;
+}
+
+.sheet__action {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-5) 0;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--color-line);
+  margin: var(--space-2) var(--space-5);
+}
+
+/* ---- SectionHeader (335:1354) --------------------------------------- */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.section-header__rule {
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+  background: var(--color-primary);
+}
+
+/* ---- LessonSummary (140:558) ---------------------------------------- */
+.summary {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+}
+
+.summary__thumb {
+  flex: none;
+  width: 106px;
+  height: 90px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface-warm);
+}
+
+.summary__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.summary__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+/* ---- 予約完了 (332:1832) --------------------------------------------- */
+.complete__icon {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-12);
+}
+
+.complete__title {
+  padding: var(--space-4) var(--space-5) var(--space-2);
+  text-align: center;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.complete__text {
+  padding: 0 var(--space-5) var(--space-4);
+  text-align: center;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+/* ---- Toast / messageBox (294:1874) ---------------------------------- */
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: min(360px, calc(100% - 32px));
+  justify-content: center;
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--shadow-card-strong);
+  animation: toast-in var(--duration-base) var(--ease-out) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

@@ -1,0 +1,140 @@
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-jp);
+  color: var(--color-ink);
+  background: #e9e4e0;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== 端末フレーム（デモ用の外枠。アプリ本体のデザインではない） ====== */
+.stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 16px 48px;
+}
+
+.stage__title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.stage__title strong {
+  display: block;
+  font-family: var(--font-logo);
+  font-size: var(--text-2xl);
+  letter-spacing: 0.24em;
+}
+
+.device {
+  width: min(var(--frame-width), 100vw);
+  height: min(916px, calc(100vh - 140px));
+  min-height: 560px;
+  background: var(--color-bg);
+  border-radius: 40px;
+  box-shadow: 0 24px 60px rgba(77, 69, 82, 0.24);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 460px) {
+  .stage {
+    padding: 0;
+    gap: 0;
+  }
+  .stage__title {
+    display: none;
+  }
+  .device {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.device__scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.device__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 画面遷移 */
+.screen-enter {
+  animation: screen-in var(--duration-base) var(--ease-out) both;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

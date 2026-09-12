@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="コラム画像のプレースホルダ">
+  <rect width="200" height="200" fill="#f1e5e7"/>
+  <g stroke="#b79aa7" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity="0.6">
+    <path d="M40 150c0-40 26-70 60-70s60 30 60 70"/>
+    <path d="M70 150c0-24 14-42 30-42s30 18 30 42"/>
+    <path d="M100 108V56"/>
+    <path d="M100 76c14-4 24-14 28-28M100 92c-14-4-24-14-28-28"/>
+  </g>
+  <circle cx="100" cy="44" r="8" fill="#b79aa7" fill-opacity="0.7"/>
+</svg>
