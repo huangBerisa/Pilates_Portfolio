@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Lesson } from '../types'
-import { LessonCard } from './LessonCard'
-import { Button } from './Button'
+import { BookingCard } from './BookingCard'
+import { AddBookingCard } from './AddBookingCard'
 
 type Props = {
   /** 予約中のレッスン。枠の埋まり具合と件数カウンタはここから導出する */
   reserved: Lesson[]
-  /** 予約できる上限枠数 */
+  /** 予約できる上限枠数（Figma: 現在の予約数 1件/3件） */
   max: number
   onReserveNew: () => void
   onDetail: (lessonId: string) => void
@@ -14,12 +14,12 @@ type Props = {
 }
 
 /**
- * 予約枠スライダー。
+ * ご予約中レッスンの枠スライダー。
+ * Figma: 予約カード (182:801) の横並び ＋ Card / Add Booking Card (210:1320)
  *
  * 枠は常に max（3件）ぶん並び、左右にドラッグして送れる。
- * 埋まっている枠は Course Card、空き枠はプレースホルダを表示し、
- * 見出し横の「N件 / 3件」カウンタは同じ `reserved` から算出しているため
- * 予約・取り消しと必ず一致する。
+ * 見出し横の「現在の予約数 N件/3件」とドットは同じ `reserved` から
+ * 算出しているので、予約・取り消しと必ず一致する。
  */
 export function ReservationSlots({ reserved, max, onReserveNew, onDetail, onCancel }: Props) {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -28,7 +28,6 @@ export function ReservationSlots({ reserved, max, onReserveNew, onDetail, onCanc
 
   const slots = Array.from({ length: max }, (_, i) => reserved[i] ?? null)
 
-  // スクロール位置から現在の枠を求める
   const syncCurrent = useCallback(() => {
     const track = trackRef.current
     if (!track) return
@@ -73,79 +72,57 @@ export function ReservationSlots({ reserved, max, onReserveNew, onDetail, onCanc
   }
 
   return (
-    <section className="section">
-      <div className="section__head">
-        <h2 className="section__title">ご予約中レッスン</h2>
-        <p className="slots__counter">
-          <strong>{reserved.length}</strong>
-          <span>件 / {max}件</span>
+    <section className="block">
+      {/* Figma: ReservedLessonSectionHeader (294:1573) */}
+      <div className="reserved-head">
+        <h2 className="reserved-head__title">ご予約中レッスン</h2>
+        <p className="reserved-head__count">
+          現在の予約数<strong>{reserved.length}</strong>件/{max}件
         </p>
       </div>
 
-      <div className="slots">
-        <div
-          className="slots__track"
-          ref={trackRef}
-          onPointerDown={onPointerDown}
-          onClickCapture={suppressClick}
-          onKeyDown={onKeyDown}
-          tabIndex={0}
-          role="group"
-          aria-label={`予約枠 ${max}件中 ${reserved.length}件が予約済み。左右にドラッグ、または矢印キーで切り替え`}
-        >
-          {slots.map((lesson, index) => (
-            <div className="slots__item" key={lesson?.id ?? `empty-${index}`}>
-              {lesson ? (
-                <LessonCard
-                  lesson={lesson}
-                  reserved
-                  onDetail={() => onDetail(lesson.id)}
-                  onReserve={() => undefined}
-                  onCancel={() => onCancel(lesson.id)}
-                />
-              ) : (
-                <EmptySlot index={index} isFirstEmpty={index === reserved.length} onReserve={onReserveNew} />
-              )}
-            </div>
-          ))}
-        </div>
+      <div
+        className="carousel"
+        ref={trackRef}
+        onPointerDown={onPointerDown}
+        onClickCapture={suppressClick}
+        onKeyDown={onKeyDown}
+        tabIndex={0}
+        role="group"
+        aria-label={`予約枠 ${max}件中 ${reserved.length}件が予約済み。左右にドラッグ、または矢印キーで切り替え`}
+      >
+        {slots.map((lesson, index) => (
+          <div className="carousel__item" key={lesson?.id ?? `empty-${index}`}>
+            {lesson ? (
+              <BookingCard
+                lesson={lesson}
+                reserved
+                onDetail={() => onDetail(lesson.id)}
+                onReserve={() => undefined}
+                onCancel={() => onCancel(lesson.id)}
+              />
+            ) : (
+              <AddBookingCard
+                title={index === 0 ? '現在ご予約はありません' : 'この枠は空いています'}
+                ctaLabel={index === 0 ? 'レッスンを予約する' : 'レッスンを追加する'}
+                showCta={index === reserved.length}
+                onReserve={onReserveNew}
+              />
+            )}
+          </div>
+        ))}
+      </div>
 
-        <div className="slots__dots" aria-hidden>
-          {slots.map((lesson, index) => (
-            <span
-              key={index}
-              className={`slots__dot${lesson ? ' is-filled' : ''}${index === current ? ' is-current' : ''}`}
-            />
-          ))}
-        </div>
+      {/* Figma: Group 5 (52:90) のドット。現在位置と枠の状態を示す */}
+      <div className="dots dots--slots" aria-hidden>
+        {slots.map((lesson, index) => (
+          <span
+            key={index}
+            className={`${lesson ? 'is-filled' : ''} ${index === current ? 'is-active' : ''}`.trim()}
+          />
+        ))}
       </div>
     </section>
-  )
-}
-
-function EmptySlot({
-  index,
-  isFirstEmpty,
-  onReserve,
-}: {
-  index: number
-  isFirstEmpty: boolean
-  onReserve: () => void
-}) {
-  return (
-    <div className="slot-empty">
-      <p className="slot-empty__label">枠 {index + 1}</p>
-      <p className="slot-empty__title">{index === 0 ? '現在ご予約はありません' : '空き枠'}</p>
-      <p className="slot-empty__note">
-        {index === 0 ? 'レッスンを予約すると、ここに表示されます。' : 'あと1枠、予約を追加できます。'}
-      </p>
-      {/* 主要CTAが画面内で競合しないよう、最初の空き枠にだけボタンを出す */}
-      {isFirstEmpty && (
-        <Button variant="secondary" onClick={onReserve}>
-          レッスンを予約する
-        </Button>
-      )}
-    </div>
   )
 }
 
@@ -177,7 +154,6 @@ function useDragScroll(ref: React.RefObject<HTMLDivElement | null>) {
       track.removeEventListener('pointermove', onMove)
       track.removeEventListener('pointerup', onUp)
       track.removeEventListener('pointercancel', onUp)
-      // scroll-snap を戻した位置へスナップさせる
       track.scrollBy({ left: 0 })
     }
 

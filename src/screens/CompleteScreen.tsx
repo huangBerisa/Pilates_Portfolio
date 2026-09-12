@@ -18,46 +18,52 @@ export function CompleteScreen({ lessonId }: { lessonId: string }) {
     <div className="screen screen-enter sheet-screen">
       <StatusBar />
 
+
       <div className="sheet">
         <div className="sheet__head">
-          <h1>予約完了</h1>
           <button type="button" className="sheet__close" onClick={goHome} aria-label="閉じる">
-            <CloseIcon size={20} color="currentColor" />
+            <CloseIcon size={24} color="var(--color-ink)" />
           </button>
+          <h1>予約完了</h1>
         </div>
 
         <div className="sheet__body">
-          <div className="complete">
-            <CompleteCheckIcon size={72} />
-            <p className="complete__title">予約が完了しました</p>
-            <p className="complete__text">
-              ご予約を受け付けました。
-              <br />
-              当日はレッスン開始10分前までにお越しください。
-            </p>
+          <div className="complete__icon">
+            <CompleteCheckIcon size={96} />
           </div>
+          <p className="complete__title">予約が完了しました</p>
+          <p className="complete__text">
+            ご予約を受け付けました。
+            <br />
+            ご予約内容をご確認ください。
+          </p>
 
           <hr className="rule" />
 
-          <div className="sheet__block">
-            <SectionHeader>ご予約内容</SectionHeader>
-            <LessonSummary lesson={lesson} />
-          </div>
+          <h2 className="sheet__subhead">ご予約内容</h2>
 
-          <div className="sheet__block">
-            <SectionHeader>持ち物</SectionHeader>
-            <ul className="item-list">
-              {program.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+          <SectionHeader>レッスン内容</SectionHeader>
+          <LessonSummary lesson={lesson} />
 
-          <Button variant="primary" block onClick={goHome}>
-            ホームに戻る
-          </Button>
+          <SectionHeader>レッスン詳細</SectionHeader>
+          <p className="sheet__text">{program.description}</p>
+
+          <SectionHeader>持ち物</SectionHeader>
+          <ul className="item-list">
+            {program.items.map((item) => (
+              <li key={item}>・{item}</li>
+            ))}
+          </ul>
+
+          <div className="sheet__action">
+            <Button variant="primary" onClick={goHome}>
+              ホーム画面に戻る
+            </Button>
+          </div>
         </div>
       </div>
+
+      <div className="screen__tail" />
     </div>
   )
 }

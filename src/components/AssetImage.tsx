@@ -2,10 +2,8 @@ import { useState } from 'react'
 
 /**
  * 写真スロット。実素材は public/images/<slot>.png に配置している。
- *
- * 差し替えは同じパスにファイルを置くだけでよい。拡張子は下の候補順に
- * 読み込みを試し、最初に成功したものを使うので揃える必要はない。
- * 対応するFigmaノードIDは docs/FIGMA_ASSETS.md を参照。
+ * 差し替えは同じパスにファイルを置くだけでよい。拡張子は下の候補順に試すので
+ * 揃える必要はない。対応する Figma ノードIDは docs/FIGMA_ASSETS.md を参照。
  */
 type Props = {
   slot: string
@@ -26,7 +24,7 @@ export function AssetImage({ slot, alt, className }: Props) {
       src={src}
       alt={alt}
       loading="lazy"
-      // 候補を順に試し、最後で止める
+      // 候補を順に試す。最後（svg プレースホルダ）で止める。
       onError={() => setIndex((i) => Math.min(i + 1, EXTENSIONS.length - 1))}
     />
   )

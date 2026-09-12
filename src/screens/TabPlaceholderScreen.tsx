@@ -39,7 +39,7 @@ export function TabPlaceholderScreen({ tab }: { tab: Exclude<TabName, 'home' | '
       <div className="placeholder gutter">
         <div className="placeholder__panel">
           <span className="placeholder__icon">
-            <Icon size={28} />
+            <Icon size={32} color="var(--color-primary)" />
           </span>
           <p className="placeholder__lead">{lead}</p>
           <p className="placeholder__note">
@@ -47,7 +47,7 @@ export function TabPlaceholderScreen({ tab }: { tab: Exclude<TabName, 'home' | '
             <br />
             Footer bar の導線のみ実装しています。
           </p>
-          <Button variant="secondary" onClick={() => goTab('home')}>
+          <Button variant="outline" onClick={() => goTab('home')}>
             ホームに戻る
           </Button>
         </div>

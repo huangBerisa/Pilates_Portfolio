@@ -1,78 +1,106 @@
 /**
  * Footer bar（Figma: Navigation / Bottom 321:1741）専用アイコン。
- *
- * 仕様書 §8: 1画面では1種類のアイコンスタイルしか使えず、line と filled の
- * 混在は禁止。そのため選択状態でも塗りには切り替えず、色・字重・
- * 位置インジケータ（CSS の .bottom-nav__item.is-active::before）で示す。
+ * Figma では Normal（線）/ hover（塗り）の2バリアントを持つため、
+ * active で塗りに切り替わるようにしている。外形は 24px 固定。
  */
 type NavIconProps = {
   size?: number
+  active?: boolean
   color?: string
 }
 
-const base = (size: number) => ({
+const svg = (size: number) => ({
   width: size,
   height: size,
   viewBox: '0 0 24 24',
-  fill: 'none' as const,
-  stroke: 'currentColor',
-  strokeWidth: 1.5,
-  strokeLinecap: 'round' as const,
-  strokeLinejoin: 'round' as const,
   'aria-hidden': true,
   focusable: 'false' as const,
 })
 
 /** Icon/home 231:1577 */
-export function HomeNavIcon({ size = 24 }: NavIconProps) {
+export function HomeNavIcon({ size = 24, active, color = 'currentColor' }: NavIconProps) {
+  const d = 'M12 3.4 3.6 10v10.1h5.9v-5.6h5v5.6h5.9V10L12 3.4Z'
   return (
-    <svg {...base(size)}>
-      <path d="M12 3.6 3.8 10.1v9.6a.7.7 0 0 0 .7.7h4.6v-5.3h5.8v5.3h4.6a.7.7 0 0 0 .7-.7v-9.6L12 3.6Z" />
+    <svg {...svg(size)} fill="none">
+      <path d={d} fill={active ? color : 'none'} stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   )
 }
 
 /** Icon/Calendar 231:1583 */
-export function CalendarNavIcon({ size = 24 }: NavIconProps) {
+export function CalendarNavIcon({ size = 24, active, color = 'currentColor' }: NavIconProps) {
   return (
-    <svg {...base(size)}>
-      <rect x="3.6" y="5.4" width="16.8" height="15" rx="3" />
-      <path d="M3.6 10h16.8M8.2 3.4v3.6M15.8 3.4v3.6" />
-      <path d="M8 13.8h.01M12 13.8h.01M16 13.8h.01M8 17h.01M12 17h.01" />
+    <svg {...svg(size)} fill="none">
+      <rect
+        x="3.4"
+        y="5.4"
+        width="17.2"
+        height="15.2"
+        rx="2.4"
+        fill={active ? color : 'none'}
+        stroke={color}
+        strokeWidth="1.5"
+      />
+      <path d="M3.4 10h17.2" stroke={active ? 'var(--color-accent)' : color} strokeWidth="1.5" />
+      <path d="M8 3.4v3.4M16 3.4v3.4" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <g fill={active ? 'var(--color-accent)' : color}>
+        <rect x="6.6" y="12.4" width="3" height="2.4" rx="0.6" />
+        <rect x="10.5" y="12.4" width="3" height="2.4" rx="0.6" />
+        <rect x="14.4" y="12.4" width="3" height="2.4" rx="0.6" />
+        <rect x="6.6" y="16" width="3" height="2.4" rx="0.6" />
+        <rect x="10.5" y="16" width="3" height="2.4" rx="0.6" />
+      </g>
     </svg>
   )
 }
 
-/** Icon/Report 231:1604 */
-export function ReportNavIcon({ size = 24 }: NavIconProps) {
+/** Icon/Report 231:1604（右下が折れたレポート用紙） */
+export function ReportNavIcon({ size = 24, active, color = 'currentColor' }: NavIconProps) {
   return (
-    <svg {...base(size)}>
-      <path d="M5.2 4.6a1 1 0 0 1 1-1h7.6l5 5v10.8a1 1 0 0 1-1 1H6.2a1 1 0 0 1-1-1V4.6Z" />
-      <path d="M13.8 3.6v5h5" />
-      <path d="M8.4 13.2h7.2M8.4 16.4h4.6" />
+    <svg {...svg(size)} fill="none">
+      <path
+        d="M4.8 3.4h9.4l5 5v12.2H4.8V3.4Z"
+        fill={active ? color : 'none'}
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M14.2 3.4v5h5" stroke={active ? 'var(--color-accent)' : color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path
+        d="M7.8 12.6h8M7.8 15.8h5.4"
+        stroke={active ? 'var(--color-accent)' : color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   )
 }
 
 /** Icon/UseAndEarn 231:1593（ポイントコインが2枚重なった形） */
-export function PointNavIcon({ size = 24 }: NavIconProps) {
+export function PointNavIcon({ size = 24, active, color = 'currentColor' }: NavIconProps) {
   return (
-    <svg {...base(size)}>
-      <circle cx="15.2" cy="15.2" r="5.8" />
-      <circle cx="9" cy="9" r="5.8" />
-      <path d="M7.6 12V6.3h2.1a1.9 1.9 0 0 1 0 3.8H7.6" />
+    <svg {...svg(size)} fill="none">
+      <circle cx="15.4" cy="15.4" r="6.1" fill={active ? color : 'none'} stroke={color} strokeWidth="1.5" />
+      <circle cx="9.2" cy="9.2" r="6.1" fill={active ? color : 'var(--color-accent)'} stroke={color} strokeWidth="1.5" />
+      <path
+        d="M7.6 12.4V6.2h2a2 2 0 1 1 0 4h-2"
+        stroke={active ? 'var(--color-accent)' : color}
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
 
 /** Icon/MembershipCard 233:1491（25×20 の会員証カード） */
-export function MemberCardIcon({ size = 24 }: NavIconProps) {
+export function MemberCardIcon({ size = 25, color = 'currentColor' }: NavIconProps) {
   return (
-    <svg {...base(size)}>
-      <rect x="2.6" y="5.2" width="18.8" height="13.6" rx="2.6" />
-      <circle cx="8.6" cy="10.6" r="1.9" />
-      <path d="M5.8 15.6c.5-1.5 1.6-2.3 2.8-2.3s2.3.8 2.8 2.3" />
-      <path d="M14.8 9.8h3.8M14.8 12.6h3.8M14.8 15.4h2.4" />
+    <svg width={size} height={(size / 25) * 20} viewBox="0 0 25 20" fill="none" aria-hidden focusable="false">
+      <rect x="0.9" y="0.9" width="23.2" height="18.2" rx="2.6" stroke={color} strokeWidth="1.6" />
+      <circle cx="8" cy="7.8" r="2.5" fill={color} />
+      <path d="M4.2 15c0.5-2.1 2-3.2 3.8-3.2s3.3 1.1 3.8 3.2H4.2Z" fill={color} />
+      <path d="M15 6.6h6M15 10h6M15 13.4h4" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   )
 }

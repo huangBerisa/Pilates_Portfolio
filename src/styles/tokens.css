@@ -1,80 +1,69 @@
 /**
  * Design tokens
- * 準拠: LINEA Pilates UI/UX Design Specification v1.0
- *
- * 値は仕様書 §3 Color Palette / §4 Typography / §5 Layout /
- * §6 Shape & Radius / §7 Shadow に一致させている。
- * Figma のアートボードと差異がある場合は仕様書を優先（仕様書 Rule 1）。
+ * Figma: LAVAピラティス予約再設計 / file s67a1QyH2FH1rpQ4XA7Ff3
+ * 変数名はFigma上のVariable名（中国語）をそのまま英語キーに対応させている。
  */
 :root {
-  /* ---- Color (§3.1) ---------------------------------------------------- */
-  --color-primary: #9a748b;       /* Mauve / Dusty Rose : Primary CTA・Active・Brand accent */
-  --color-ink: #554a56;           /* Deep Plum : 本文・見出し・主要アイコン */
-  --color-canvas: #f8f5f2;        /* Warm Ivory : アプリ背景・大きな余白 */
-  --color-surface: #ffffff;       /* White : カード・ボトムナビ・モーダル */
-  --color-lavender: #c9c9d8;      /* Soft Lavender : 副次カテゴリ・非活性 */
-  --color-sage: #a9b7a0;          /* Sage Green : 完了・予約済・Calm status */
-  --color-beige: #e9ded2;         /* Warm Beige : キャンペーン・お知らせ */
-  --color-gray: #b8b4b6;          /* Gray : 二次テキスト・メタデータ・Disabled */
-  --color-icon-inactive: #a9a3a8; /* §8 Icon Color / Inactive */
+  /* ---- Color / Figma Variables ---------------------------------------- */
+  --color-ink: #4d4552;          /* 粉黑   : 本文・見出し */
+  --color-primary: #907280;      /* 深粉紫 : ブランド主色 / 主要ボタン */
+  --color-primary-border: #b79aa7; /* 粉色(枠線) : 枠線・区切り */
+  --color-accent: #f1e5e7;       /* 粉色   : 淡いアクセント面 */
+  --color-accent-deep: #eddee0;  /* 粉色(濃) : グラデーション終点 */
+  --color-surface-warm: #f1edeb; /* 淺粉灰 : 非選択セグメント面 */
+  --color-cream: #f7f4ef;        /* 米白   : 反転文字・淡背景 */
+  --color-success: #abb5a1;      /* 粉綠   : 完了・予約済 */
+  --color-icon: #222222;         /* fill_icon */
+  --color-line: #d1d1d1;         /* line_gray */
+  --color-bg: #ffffff;           /* bg_white */
+  --color-muted: #9b93a0;
 
-  /* 上記から導出した補助色（面・罫線用。新しい色相は足さない） */
-  --color-primary-tint: #f2ecf0;  /* Mauve を Ivory に乗せた淡色。選択チップ・淡い面 */
-  --color-primary-tint-deep: #e8dee5;
-  --color-sage-tint: #eef1ec;
-  --color-line: #e7e1dd;          /* 罫線（Ivory 寄りのヘアライン） */
-
-  /* ---- Typography (§4.2) ----------------------------------------------- */
+  /* ---- Typography ------------------------------------------------------ */
   --font-jp: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
   --font-logo: 'Cormorant Garamond', 'Times New Roman', serif;
 
-  --text-h1: 28px;       /* Hero / Page Title   : Medium */
-  --text-h2: 22px;       /* Section Title       : Medium */
-  --text-h3: 17px;       /* Card Title          : Medium */
-  --text-body: 15px;     /* Body                : Regular */
-  --text-caption: 13px;  /* Caption             : Regular */
-  --text-micro: 11px;    /* チップ内の極小ラベルのみ */
-  --text-kpi: 28px;      /* Number / KPI        : Medium（ラベルより大きく） */
+  --text-3xl: 28px;
+  --text-2xl: 22px;
+  --text-xl: 18px;
+  --text-lg: 16px;
+  --text-md: 14px;
+  --text-sm: 12px;
+  --text-xs: 10px;
+  --text-2xs: 8px;
 
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
 
-  --leading-tight: 1.35;
-  --leading-body: 1.7;
-
-  /* ---- Spacing — 8pt system (§5.1 / Rule 5) ---------------------------- */
-  --space-1: 4px;   /* アイコンと文字の間だけに使う補助値 */
+  /* ---- Spacing (4pxグリッド) ------------------------------------------- */
+  --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
+  --space-5: 18px;
   --space-6: 24px;
   --space-8: 32px;
-  --space-10: 40px;
   --space-12: 48px;
 
-  --margin-screen: 20px;  /* 左右マージン */
-  --padding-card: 20px;   /* カード内側 */
-  --gap-card: 16px;       /* カード同士 */
-  --gap-section: 32px;    /* セクション同士 */
+  /* ---- Radius ---------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
 
-  /* ---- Radius (§6) ----------------------------------------------------- */
-  --radius-card: 20px;
-  --radius-image: 16px;
-  --radius-chip: 14px;
-  --radius-button: 26px;
+  /* ---- Elevation ------------------------------------------------------- */
+  --shadow-card: 0 0 2px rgba(0, 0, 0, 0.25);
+  --shadow-card-strong: 0 0 4px rgba(0, 0, 0, 0.25);
 
-  /* ---- Shadow (§7) — Floating softly ----------------------------------- */
-  --shadow-card: 0 4px 20px rgba(80, 60, 70, 0.06);
-  --shadow-modal: 0 12px 40px rgba(60, 50, 60, 0.12);
-
-  /* ---- Interaction (§15) ----------------------------------------------- */
+  /* ---- Motion ---------------------------------------------------------- */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
+  --duration-fast: 140ms;
+  --duration-base: 240ms;
 
-  /* ---- Accessibility (§14) --------------------------------------------- */
-  --touch-min: 44px;
+  /* ---- Layout ---------------------------------------------------------- */
+  /* 実装上の基準端末は iPhone 17（402×874pt）。Figmaのアートボードは423px幅だが、
+     レイアウトは可変で組んでいるためそのまま収まる。 */
+  --frame-width: 402px;
+  --gutter: 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -83,6 +72,5 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
