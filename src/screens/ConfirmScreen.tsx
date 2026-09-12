@@ -1,5 +1,4 @@
 import { useBooking } from '../state/BookingContext'
-import { StatusBar } from '../components/StatusBar'
 import { SectionHeader } from '../components/SectionHeader'
 import { LessonSummary } from '../components/LessonSummary'
 import { Button } from '../components/Button'
@@ -22,7 +21,6 @@ export function ConfirmScreen({ lessonId, readOnly }: Props) {
   if (!lesson) {
     return (
       <div className="screen screen-enter">
-        <StatusBar />
         <p className="empty">レッスンが見つかりませんでした。</p>
       </div>
     )
@@ -34,7 +32,6 @@ export function ConfirmScreen({ lessonId, readOnly }: Props) {
 
   return (
     <div className="screen screen-enter sheet-screen">
-      <StatusBar />
 
 
       <div className="sheet">

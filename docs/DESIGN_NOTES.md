@@ -77,7 +77,6 @@ Figma の「予約カード」(182:801) の横並びと「Card / Add Booking Car
 | コード | Figma ノード |
 | --- | --- |
 | `components/AppHeader.tsx` | `HeadBg` 335:1239 / `Head` 182:1029 |
-| `components/StatusBar.tsx` | `UiLockTop` 292:1734 |
 | `components/BookingCard.tsx` | `Card / Booking Card` 125:495 |
 | `components/AddBookingCard.tsx` | `Card / Add Booking Card` 210:1320 |
 | `components/ReservationSlots.tsx` | 予約カードの横並び 182:801 + ドット `Group 5` 52:90 |
@@ -122,7 +121,12 @@ Figma の「予約カード」(182:801) の横並びと「Card / Add Booking Car
    また予約確認・予約完了はシート表示のため Footer bar を非表示にしている。
 8. **アイコン・写真**
    下記「素材」を参照。
-9. **レッスン時刻**
+9. **ステータスバーを実装しない**
+   Figma の `UiLockTop` (292:1734) は時刻・Dynamic Island・電波/Wi-Fi/電池を描いたモックだが、
+   実機では OS のステータスバーが表示されるため二重になる。実装では省き、
+   代わりにヘッダー上端で `env(safe-area-inset-top)` ぶんの余白を確保している。
+
+10. **レッスン時刻**
    Figma の Refresh Core は「21:04~21:50 (45分)」と表記が不整合だったため、
    実装では開始時刻＋所要時間から終了時刻を算出している（21:04~21:49）。
 

@@ -1,5 +1,4 @@
 import { BellIcon, MenuIcon } from './icons'
-import { StatusBar } from './StatusBar'
 
 /** Figma: HeadBg/logo 361:1256（書き出し実寸 105×33） */
 const LOGO = `${import.meta.env.BASE_URL}images/logo.png`
@@ -15,7 +14,6 @@ type Props = {
 export function AppHeader({ title, onMenu, onBell }: Props) {
   return (
     <header className="appbar">
-      <StatusBar />
       <div className="appbar__row">
         <button type="button" className="appbar__icon" onClick={onMenu} aria-label="メニューを開く">
           <MenuIcon size={24} color="var(--color-icon)" />

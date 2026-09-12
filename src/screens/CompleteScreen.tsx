@@ -1,5 +1,4 @@
 import { useBooking } from '../state/BookingContext'
-import { StatusBar } from '../components/StatusBar'
 import { SectionHeader } from '../components/SectionHeader'
 import { LessonSummary } from '../components/LessonSummary'
 import { Button } from '../components/Button'
@@ -16,7 +15,6 @@ export function CompleteScreen({ lessonId }: { lessonId: string }) {
 
   return (
     <div className="screen screen-enter sheet-screen">
-      <StatusBar />
 
 
       <div className="sheet">
