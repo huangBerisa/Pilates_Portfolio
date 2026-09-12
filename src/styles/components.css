@@ -841,3 +841,137 @@ button.chip:hover {
     transform: translate(-50%, 0);
   }
 }
+
+/* ---- Footer bar / Navigation / Bottom (321:1741) -------------------- */
+.bottom-nav {
+  position: relative;
+  flex: none;
+  height: 82px;
+  display: flex;
+  align-items: stretch;
+  background: var(--color-accent);
+  /* ホームインジケータぶんの余白 */
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.bottom-nav__group {
+  flex: 1;
+  display: flex;
+}
+
+/* 中央の会員証ボタンを避ける空き（Figma: Navigation_bg 322:1757 = 79px） */
+.bottom-nav__notch {
+  flex: none;
+  width: 79px;
+}
+
+.bottom-nav__item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 4px;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.bottom-nav__item span {
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.bottom-nav__item:not(.is-active) {
+  opacity: 0.72;
+}
+
+.bottom-nav__item:hover {
+  opacity: 1;
+}
+
+.bottom-nav__member {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 40px;
+  background: var(--color-primary);
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.bottom-nav__member:hover {
+  background: #7f6371;
+}
+
+.bottom-nav__member:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
+.bottom-nav__member.is-active {
+  box-shadow: 0 0 0 3px var(--color-bg), 0 0 0 5px var(--color-primary-border);
+}
+
+/* Footer bar のぶんだけ本文の下端に余白を足す */
+.device__scroll--with-nav .screen {
+  padding-bottom: var(--space-6);
+}
+
+/* ---- タブのプレースホルダ画面 ---------------------------------------- */
+.placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-12);
+}
+
+.placeholder__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-8) var(--space-6);
+  border: 1px dashed var(--color-primary-border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-deep));
+  text-align: center;
+}
+
+.placeholder__icon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.placeholder__lead {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  line-height: 1.6;
+}
+
+.placeholder__note {
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-ink);
+}

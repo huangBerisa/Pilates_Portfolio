@@ -49,6 +49,8 @@ Figma の Typography フレーム（13:7）のスケールをそのまま採用�
 | `components/ArticleCard.tsx` | `ArticleCard` 290:1566 |
 | `components/Button.tsx` | `Button` 123:443 / 125:491 / `LoadMoreButton` 291:1624 |
 | `components/Toast.tsx` | `messageBox` 294:1874 |
+| `components/BottomNav.tsx` | `Navigation / Bottom` 321:1741 / `Navigation_button` 316:1785 / `Icon/MemberCard` 233:1499 |
+| `components/icons/nav.tsx` | `Icon/home` 231:1577 / `Icon/Calendar` 231:1583 / `Icon/Report` 231:1604 / `Icon/UseAndEarn` 231:1593 / `Icon/MembershipCard` 233:1491 |
 
 ## Figma からの意図的な差分
 
@@ -68,9 +70,14 @@ Figma の Typography フレーム（13:7）のスケールをそのまま採用�
    ダミーデータで残席0の枠を用意し `満席` として予約不可にしている。
 5. **空状態・上限到達**
    条件に合うレッスンが0件のときのテキスト、予約3件到達時のトーストは Figma に無いため追加。
-6. **アイコン・写真**
+6. **Footer bar の遷移先**
+   Figma には Footer bar のコンポーネント（アイコンの Normal / hover、中央の会員証ボタン）まで定義があり、
+   各タブの画面は含まれていない。導線を殺さないため、会員証・レポート・貯める・使う の3タブは
+   「今回のスコープ外」と明示するプレースホルダ画面へ遷移させている。
+   また予約確認・予約完了はシート表示のため Footer bar を非表示にしている。
+7. **アイコン・写真**
    下記「素材」を参照。
-7. **レッスン時刻**
+8. **レッスン時刻**
    Figma の Refresh Core は「21:04~21:50 (45分)」と表記が不整合だったため、
    実装では開始時刻＋所要時間から終了時刻を算出している（21:04~21:49）。
 
@@ -78,8 +85,9 @@ Figma の Typography フレーム（13:7）のスケールをそのまま採用�
 
 Figma 上の写真・SVG アセットは、実装環境からFigmaのアセットCDNへ接続できなかったため同梱できていない。
 
-- **アイコン**: Figma と同じ外形サイズ（14 / 16 / 24 / 96px）でインライン SVG として再構成
-  （`src/components/icons/index.tsx`）。
+- **アイコン**: Figma と同じ外形サイズ（14 / 16 / 24 / 96px、Footer bar は 24px と 25×20px）で
+  インライン SVG として再構成（`src/components/icons/index.tsx`、`src/components/icons/nav.tsx`）。
+  Footer bar のアイコンは Figma の Normal / hover バリアントに合わせ、選択中は塗りに切り替わる。
 - **写真**: ブランドカラーで組んだプレースホルダ SVG を `public/images/` に同梱。
   差し替え手順は [FIGMA_ASSETS.md](./FIGMA_ASSETS.md)。
 

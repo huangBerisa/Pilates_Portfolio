@@ -4,17 +4,22 @@ import { LESSONS, lessonById } from '../data/lessons'
 import { MAX_RESERVATIONS } from '../data/notice'
 import { TODAY } from '../data/calendar'
 
-export type ScreenName = 'home' | 'reserve' | 'confirm' | 'complete'
 export type SearchMode = 'favorite' | 'all' | 'condition'
 
+/** Footer bar のタブ（Figma: Navigation / Bottom 321:1741） */
+export type TabName = 'home' | 'reserve' | 'member' | 'report' | 'points'
+
 type Nav =
-  | { screen: 'home' }
-  | { screen: 'reserve' }
+  | { screen: TabName }
   | { screen: 'confirm'; lessonId: string; readOnly?: boolean }
   | { screen: 'complete'; lessonId: string }
 
+const TABS: TabName[] = ['home', 'reserve', 'member', 'report', 'points']
+const isTab = (screen: Nav['screen']): screen is TabName => (TABS as string[]).includes(screen)
+
 type BookingState = {
   nav: Nav
+  lastTab: TabName
   reservations: Reservation[]
   /** 予約カレンダーで選択中の日付 */
   selectedDate: string
@@ -29,6 +34,9 @@ type BookingState = {
 type BookingActions = {
   go: (nav: Nav) => void
   goHome: () => void
+  goTab: (tab: TabName) => void
+  /** Footer bar のハイライト。シート系の画面では直前のタブを維持する */
+  activeTab: TabName
   openReserve: (date?: string) => void
   openConfirm: (lessonId: string, readOnly?: boolean) => void
   reserve: (lessonId: string) => void
@@ -51,6 +59,7 @@ const BookingContext = createContext<(BookingState & BookingActions) | null>(nul
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<BookingState>({
     nav: { screen: 'home' },
+    lastTab: 'home',
     reservations: [],
     selectedDate: TODAY,
     weekStart: TODAY,
@@ -61,7 +70,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
 
   const patch = useCallback((next: Partial<BookingState>) => setState((s) => ({ ...s, ...next })), [])
 
-  const go = useCallback((nav: Nav) => patch({ nav }), [patch])
+  const go = useCallback(
+    (nav: Nav) => setState((s) => ({ ...s, nav, lastTab: isTab(nav.screen) ? nav.screen : s.lastTab })),
+    [],
+  )
 
   const showToast = useCallback(
     (message: string) => {
@@ -89,7 +101,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     ...state,
     go,
     goHome: () => go({ screen: 'home' }),
-    openReserve: (date) => setState((s) => ({ ...s, nav: { screen: 'reserve' }, selectedDate: date ?? s.selectedDate })),
+    goTab: (tab) => go({ screen: tab }),
+    activeTab: isTab(state.nav.screen) ? state.nav.screen : state.lastTab,
+    openReserve: (date) =>
+      setState((s) => ({ ...s, nav: { screen: 'reserve' }, lastTab: 'reserve', selectedDate: date ?? s.selectedDate })),
     openConfirm: (lessonId, readOnly) => go({ screen: 'confirm', lessonId, readOnly }),
     reserve: (lessonId) => {
       setState((s) => {
