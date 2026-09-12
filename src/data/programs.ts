@@ -30,15 +30,6 @@ export const PROGRAMS: LessonProgram[] = [
     items: COMMON_ITEMS,
     image: 'refresh-core',
   },
-  {
-    id: 'basic-align',
-    name: 'Basic Align',
-    level: 1,
-    description:
-      'マシンピラティスの基本動作を、ひとつずつ確認しながら進める入門プログラム。マシンの設定方法から丁寧にご案内しますので、初めての方はまずこちらからご参加ください。',
-    items: COMMON_ITEMS,
-    image: 'basic-align',
-  },
 ]
 
 export const programById = (id: string) => PROGRAMS.find((p) => p.id === id)!

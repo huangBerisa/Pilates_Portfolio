@@ -1,5 +1,7 @@
-import { BellIcon, LogoMark, MenuIcon } from './icons'
+import { BellIcon, MenuIcon } from './icons'
 import { StatusBar } from './StatusBar'
+
+const LOGO = `${import.meta.env.BASE_URL}images/logo.png`
 
 type Props = {
   /** 渡すとロゴの代わりにタイトルを表示（Figma: カレンダー画面の「レッスン予約」） */
@@ -21,10 +23,8 @@ export function AppHeader({ title, onMenu, onBell }: Props) {
         {title ? (
           <h1 className="appbar__title">{title}</h1>
         ) : (
-          <p className="logo" aria-label="LINEA">
-            <LogoMark size={26} />
-            <span aria-hidden>LINEA</span>
-          </p>
+          // Figma: HeadBg/logo 361:1256（書き出し実寸 105×33）
+          <img className="logo" src={LOGO} width={105} height={33} alt="LINEA" />
         )}
 
         {title ? (

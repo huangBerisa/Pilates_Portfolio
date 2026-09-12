@@ -16,10 +16,10 @@ const DAY_PATTERNS: Slot[][] = [
     { programId: 'control-flow', start: '18:30', duration: 30, storeId: 'moriguchi', instructor: '岡本 幸' },
     { programId: 'shape-up-core', start: '19:40', duration: 45, storeId: 'moriguchi', instructor: '星野 優美' },
     { programId: 'refresh-core', start: '21:04', duration: 45, storeId: 'moriguchi', instructor: '西野 沙雪' },
-    { programId: 'basic-align', start: '21:40', duration: 45, storeId: 'umeda', instructor: '三浦 詩織' },
+    { programId: 'control-flow', start: '21:40', duration: 30, storeId: 'umeda', instructor: '三浦 詩織' },
   ],
   [
-    { programId: 'basic-align', start: '09:30', duration: 45, storeId: 'moriguchi', instructor: '三浦 詩織' },
+    { programId: 'refresh-core', start: '09:30', duration: 45, storeId: 'moriguchi', instructor: '三浦 詩織' },
     { programId: 'control-flow', start: '12:10', duration: 30, storeId: 'umeda', instructor: '岡本 幸' },
     { programId: 'shape-up-core', start: '18:50', duration: 45, storeId: 'moriguchi', instructor: '星野 優美', capacityLeft: 0 },
     { programId: 'refresh-core', start: '20:20', duration: 45, storeId: 'umeda', instructor: '西野 沙雪' },
@@ -27,7 +27,7 @@ const DAY_PATTERNS: Slot[][] = [
   [
     { programId: 'refresh-core', start: '08:45', duration: 45, storeId: 'umeda', instructor: '西野 沙雪' },
     { programId: 'control-flow', start: '11:00', duration: 30, storeId: 'moriguchi', instructor: '岡本 幸' },
-    { programId: 'basic-align', start: '15:30', duration: 45, storeId: 'moriguchi', instructor: '三浦 詩織' },
+    { programId: 'shape-up-core', start: '15:30', duration: 45, storeId: 'moriguchi', instructor: '三浦 詩織' },
     { programId: 'shape-up-core', start: '19:10', duration: 45, storeId: 'umeda', instructor: '星野 優美' },
   ],
 ]

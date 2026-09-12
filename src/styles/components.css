@@ -140,18 +140,9 @@
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-family: var(--font-logo);
-  font-size: 24px;
-  letter-spacing: 0.18em;
-  line-height: 1;
-  color: var(--color-primary);
-}
-
-.logo span {
-  padding-left: 4px;
+  display: block;
+  width: 105px;
+  height: 33px;
 }
 
 /* ---------------------------------------------------------------------
@@ -455,10 +446,11 @@ button.chip:hover {
   gap: var(--space-3);
 }
 
+/* Figma の画像スロット実寸 106×90。書き出し素材と一致するのでトリミングが起きない */
 .lesson-card__thumb {
   flex: none;
-  width: 88px;
-  height: 88px;
+  width: 106px;
+  height: 90px;
   border-radius: var(--radius-image);
   overflow: hidden;
   background: var(--color-primary-tint);
@@ -874,8 +866,8 @@ button.chip:hover {
 
 .summary__thumb {
   flex: none;
-  width: 88px;
-  height: 88px;
+  width: 106px;
+  height: 90px;
   border-radius: var(--radius-image);
   overflow: hidden;
   background: var(--color-primary-tint);

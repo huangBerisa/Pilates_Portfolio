@@ -135,18 +135,3 @@ export function CompleteCheckIcon({ size = 96, className }: IconProps) {
   )
 }
 
-/** ヘッダーのLINEAロゴマーク（Figma: logo_color 361:1250 相当の線画） */
-export function LogoMark({ size = 32, className }: IconProps) {
-  return (
-    <svg width={size * 0.79} height={size} viewBox="0 0 26 33" fill="none" className={className} aria-hidden focusable="false">
-      <path
-        d="M13 1.5c5.4 3.6 8.2 8 8.2 13 0 5.6-3.6 9.8-8.2 12.2C8.4 24.3 4.8 20.1 4.8 14.5c0-5 2.8-9.4 8.2-13Z"
-        stroke="var(--color-primary)"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-      <path d="M13 6.6v24.8" stroke="var(--color-primary)" strokeOpacity="0.5" strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M13 16.4c2.6-1.4 4.6-3.4 6-6M13 21.6c-2.6-1.4-4.6-3.4-6-6" stroke="var(--color-primary)" strokeOpacity="0.5" strokeWidth="1.1" strokeLinecap="round" />
-    </svg>
-  )
-}
