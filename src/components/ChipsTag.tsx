@@ -9,12 +9,15 @@ type Props = {
   onClick?: () => void
 }
 
-/** Figma: ChipsTag (167:949 / 349:1479) */
+/**
+ * Figma: ChipsTag (167:949 / 349:1479)
+ * 店舗の絞り込みは単一選択なので、押せるチップは radio として扱う。
+ */
 export function ChipsTag({ children, selected, tone = 'default', onClick }: Props) {
   const className = `chip${selected ? ' chip--selected' : ''}${tone === 'success' ? ' chip--success' : ''}`
   if (!onClick) return <span className={className}>{children}</span>
   return (
-    <button type="button" className={className} onClick={onClick} aria-pressed={Boolean(selected)}>
+    <button type="button" role="radio" aria-checked={Boolean(selected)} className={className} onClick={onClick}>
       {children}
     </button>
   )

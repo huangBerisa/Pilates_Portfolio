@@ -25,8 +25,7 @@ export function ReserveScreen() {
     searchMode,
     setSearchMode,
     storeFilter,
-    toggleStore,
-    clearStoreFilter,
+    selectStore,
     lessonsOn,
     openConfirm,
     cancelReservation,
@@ -51,12 +50,12 @@ export function ReserveScreen() {
           ariaLabel="探し方を選ぶ"
         />
 
-        <div className="filter-row filter-row--wrap">
-          <ChipsTag selected={storeFilter.length === 0} onClick={clearStoreFilter}>
+        <div className="filter-row filter-row--wrap" role="radiogroup" aria-label="店舗で絞り込む">
+          <ChipsTag selected={storeFilter === null} onClick={() => selectStore(null)}>
             すべて
           </ChipsTag>
           {STORES.map((store) => (
-            <ChipsTag key={store.id} selected={storeFilter.includes(store.id)} onClick={() => toggleStore(store.id)}>
+            <ChipsTag key={store.id} selected={storeFilter === store.id} onClick={() => selectStore(store.id)}>
               {store.name}
             </ChipsTag>
           ))}

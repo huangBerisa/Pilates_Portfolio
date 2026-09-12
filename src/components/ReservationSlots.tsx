@@ -102,12 +102,7 @@ export function ReservationSlots({ reserved, max, onReserveNew, onDetail, onCanc
                 onCancel={() => onCancel(lesson.id)}
               />
             ) : (
-              <AddBookingCard
-                title={index === 0 ? '現在ご予約はありません' : 'この枠は空いています'}
-                ctaLabel={index === 0 ? 'レッスンを予約する' : 'レッスンを追加する'}
-                showCta={index === reserved.length}
-                onReserve={onReserveNew}
-              />
+              <AddBookingCard onReserve={onReserveNew} />
             )}
           </div>
         ))}

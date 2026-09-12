@@ -1,4 +1,5 @@
 import { useBooking } from '../state/BookingContext'
+import { Modal } from '../components/Modal'
 import { SectionHeader } from '../components/SectionHeader'
 import { LessonSummary } from '../components/LessonSummary'
 import { Button } from '../components/Button'
@@ -8,18 +9,16 @@ import { programById } from '../data/programs'
 
 /** Figma: 予約完了画面 (332:1832) */
 export function CompleteScreen({ lessonId }: { lessonId: string }) {
-  const { goHome } = useBooking()
+  const { goHome, closeOverlay } = useBooking()
   const lesson = lessonById(lessonId)
   if (!lesson) return null
   const program = programById(lesson.programId)
 
   return (
-    <div className="screen screen-enter sheet-screen">
-
-
+    <Modal label="予約完了" onClose={closeOverlay}>
       <div className="sheet">
         <div className="sheet__head">
-          <button type="button" className="sheet__close" onClick={goHome} aria-label="閉じる">
+          <button type="button" className="sheet__close" onClick={closeOverlay} aria-label="閉じる">
             <CloseIcon size={24} color="var(--color-ink)" />
           </button>
           <h1>予約完了</h1>
@@ -60,8 +59,6 @@ export function CompleteScreen({ lessonId }: { lessonId: string }) {
           </div>
         </div>
       </div>
-
-      <div className="screen__tail" />
-    </div>
+    </Modal>
   )
 }

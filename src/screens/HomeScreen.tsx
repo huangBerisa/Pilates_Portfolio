@@ -22,8 +22,7 @@ export function HomeScreen() {
     selectedDate,
     setSelectedDate,
     storeFilter,
-    toggleStore,
-    clearStoreFilter,
+    selectStore,
     lessonsOn,
     openReserve,
     openConfirm,
@@ -72,12 +71,12 @@ export function HomeScreen() {
         />
 
         <div className="filter-row">
-          <div className="filter-row__chips">
-            <ChipsTag selected={storeFilter.length === 0} onClick={clearStoreFilter}>
+          <div className="filter-row__chips" role="radiogroup" aria-label="店舗で絞り込む">
+            <ChipsTag selected={storeFilter === null} onClick={() => selectStore(null)}>
               すべて
             </ChipsTag>
             {STORES.map((store) => (
-              <ChipsTag key={store.id} selected={storeFilter.includes(store.id)} onClick={() => toggleStore(store.id)}>
+              <ChipsTag key={store.id} selected={storeFilter === store.id} onClick={() => selectStore(store.id)}>
                 {store.name}
               </ChipsTag>
             ))}

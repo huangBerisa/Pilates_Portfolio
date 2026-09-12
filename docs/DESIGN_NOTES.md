@@ -68,7 +68,6 @@ Figma の「予約カード」(182:801) の横並びと「Card / Add Booking Car
 - 埋まっている枠は Booking Card、空き枠は Add Booking Card
 - 見出し横の「現在の予約数 N件/3件」とドットは同じ `reserved` 配列から算出しているため、
   予約・取り消しと必ず一致する
-- 予約導線が画面内で重複しないよう、CTA ボタンは最初の空き枠にだけ出す
 - ドラッグ中は `scroll-snap` を外し、離したときにスナップ。
   6px 以上動いた直後のクリックは無効化してボタンの誤爆を防ぐ
 
@@ -89,6 +88,7 @@ Figma の「予約カード」(182:801) の横並びと「Card / Add Booking Car
 | `components/ArticleCard.tsx` | `ArticleCard` 290:1566 |
 | `components/Button.tsx` | `Button` 123:443 / 125:491 / `LoadMoreButton` 291:1624 |
 | `components/Toast.tsx` | `messageBox` 294:1874 |
+| `components/Modal.tsx` | 予約確認 140:547 / 予約完了 332:1832 をポップアップとして重ねる層 |
 | `components/BottomNav.tsx` | `Navigation / Bottom` 321:1741 / `Navigation_button` 316:1785 / `Icon/MemberCard` 233:1499 |
 | `components/icons/nav.tsx` | `Icon/home` 231:1577 / `Icon/Calendar` 231:1583 / `Icon/Report` 231:1604 / `Icon/UseAndEarn` 231:1593 / `Icon/MembershipCard` 233:1491 |
 
@@ -121,12 +121,22 @@ Figma の「予約カード」(182:801) の横並びと「Card / Add Booking Car
    また予約確認・予約完了はシート表示のため Footer bar を非表示にしている。
 8. **アイコン・写真**
    下記「素材」を参照。
-9. **ステータスバーを実装しない**
+9. **予約確認・予約完了・レッスン詳細はポップアップ**
+   Figma は独立した画面として描かれているが、実装では下のタブ画面を残したまま
+   スクリムを敷いて重ねるモーダルにしている（`src/components/Modal.tsx`）。
+   背景クリックと Esc で閉じられ、閉じると直前のタブに戻る。
+   これに伴い、レッスン詳細（閲覧のみ）のボタンは「ホーム画面に戻る」から
+   「閉じる」に変更した。予約カレンダーから開いたときにホームへ飛ぶのは不自然なため。
+
+10. **店舗の絞り込みは単一選択**
+   「すべて / 京阪守口市店 / 東梅田店」から常に1つだけ選ばれる radio 相当にしている。
+
+11. **ステータスバーを実装しない**
    Figma の `UiLockTop` (292:1734) は時刻・Dynamic Island・電波/Wi-Fi/電池を描いたモックだが、
    実機では OS のステータスバーが表示されるため二重になる。実装では省き、
    代わりにヘッダー上端で `env(safe-area-inset-top)` ぶんの余白を確保している。
 
-10. **レッスン時刻**
+12. **レッスン時刻**
    Figma の Refresh Core は「21:04~21:50 (45分)」と表記が不整合だったため、
    実装では開始時刻＋所要時間から終了時刻を算出している（21:04~21:49）。
 

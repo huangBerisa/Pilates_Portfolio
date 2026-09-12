@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { BookingProvider, useBooking } from './state/BookingContext'
+import { BookingProvider, useBooking, type TabName } from './state/BookingContext'
 import { DEVICE, useStageFit } from './useStageFit'
 import { HomeScreen } from './screens/HomeScreen'
 import { ReserveScreen } from './screens/ReserveScreen'
@@ -9,26 +9,29 @@ import { TabPlaceholderScreen } from './screens/TabPlaceholderScreen'
 import { BottomNav } from './components/BottomNav'
 import { Toast } from './components/Toast'
 
+function TabScreen({ tab }: { tab: TabName }) {
+  if (tab === 'home') return <HomeScreen />
+  if (tab === 'reserve') return <ReserveScreen />
+  return <TabPlaceholderScreen tab={tab} />
+}
+
 function Router() {
-  const { nav, toast } = useBooking()
-  // 予約確認・予約完了はシート表示のため Footer bar を出さない
-  const showNav = nav.screen !== 'confirm' && nav.screen !== 'complete'
+  const { nav, activeTab, toast } = useBooking()
+  // 予約確認・予約完了はポップアップ。下のタブ画面はそのまま残す
+  const overlay = nav.screen === 'confirm' || nav.screen === 'complete' ? nav : null
 
   return (
     <div className="device">
-      <div
-        className={`device__scroll${showNav ? ' device__scroll--with-nav' : ''}`}
-        key={`${nav.screen}-${'lessonId' in nav ? nav.lessonId : ''}`}
-      >
-        {nav.screen === 'home' && <HomeScreen />}
-        {nav.screen === 'reserve' && <ReserveScreen />}
-        {nav.screen === 'member' && <TabPlaceholderScreen tab="member" />}
-        {nav.screen === 'report' && <TabPlaceholderScreen tab="report" />}
-        {nav.screen === 'points' && <TabPlaceholderScreen tab="points" />}
-        {nav.screen === 'confirm' && <ConfirmScreen lessonId={nav.lessonId} readOnly={nav.readOnly} />}
-        {nav.screen === 'complete' && <CompleteScreen lessonId={nav.lessonId} />}
+      <div className="device__scroll device__scroll--with-nav" key={activeTab}>
+        <TabScreen tab={activeTab} />
       </div>
-      {showNav && <BottomNav />}
+      <BottomNav />
+
+      {overlay?.screen === 'confirm' && (
+        <ConfirmScreen lessonId={overlay.lessonId} readOnly={overlay.readOnly} />
+      )}
+      {overlay?.screen === 'complete' && <CompleteScreen lessonId={overlay.lessonId} />}
+
       {toast && <Toast message={toast} />}
     </div>
   )

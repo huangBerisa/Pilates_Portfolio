@@ -616,12 +616,49 @@ button.chip:hover {
   color: var(--color-line);
 }
 
-/* ---- Sheet（予約確認 / 予約完了） ------------------------------------ */
-.sheet-screen {
-  position: relative;
-  background: var(--color-bg);
-  padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px));
-  padding-bottom: var(--space-8);
+/* ---- Modal（予約確認 / 予約完了 / レッスン詳細） ---------------------- */
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space-6) + env(safe-area-inset-top, 0px)) 14px calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  background: rgba(77, 69, 82, 0.42);
+  animation: modal-fade var(--duration-base) var(--ease-out) both;
+}
+
+.modal__panel {
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  border-radius: var(--radius-md);
+  animation: modal-rise var(--duration-base) var(--ease-out) both;
+}
+
+.modal__panel::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-rise {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: none;
+  }
 }
 
 .sheet__head {
@@ -641,10 +678,9 @@ button.chip:hover {
 }
 
 .sheet {
-  margin-inline: 14px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 12px 40px rgba(60, 50, 60, 0.18);
   background: var(--color-bg);
 }
 

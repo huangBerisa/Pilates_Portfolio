@@ -1,4 +1,5 @@
 import { useBooking } from '../state/BookingContext'
+import { Modal } from '../components/Modal'
 import { SectionHeader } from '../components/SectionHeader'
 import { LessonSummary } from '../components/LessonSummary'
 import { Button } from '../components/Button'
@@ -15,14 +16,16 @@ type Props = {
 
 /** Figma: 予約する確認画面 (140:547) */
 export function ConfirmScreen({ lessonId, readOnly }: Props) {
-  const { reserve, goHome, isReserved, isFull, showToast } = useBooking()
+  const { reserve, closeOverlay, isReserved, isFull, showToast } = useBooking()
   const lesson = lessonById(lessonId)
 
   if (!lesson) {
     return (
-      <div className="screen screen-enter">
-        <p className="empty">レッスンが見つかりませんでした。</p>
-      </div>
+      <Modal label="エラー" onClose={closeOverlay}>
+        <div className="sheet__body">
+          <p className="empty">レッスンが見つかりませんでした。</p>
+        </div>
+      </Modal>
     )
   }
 
@@ -30,16 +33,16 @@ export function ConfirmScreen({ lessonId, readOnly }: Props) {
   const alreadyReserved = isReserved(lesson.id)
   const showAction = !readOnly && !alreadyReserved
 
+  const title = readOnly || alreadyReserved ? 'レッスン詳細' : '予約内容確認'
+
   return (
-    <div className="screen screen-enter sheet-screen">
-
-
+    <Modal label={title} onClose={closeOverlay}>
       <div className="sheet">
         <div className="sheet__head">
-          <button type="button" className="sheet__close" onClick={goHome} aria-label="閉じる">
+          <button type="button" className="sheet__close" onClick={closeOverlay} aria-label="閉じる">
             <CloseIcon size={24} color="var(--color-ink)" />
           </button>
-          <h1>{readOnly || alreadyReserved ? 'レッスン詳細' : '予約内容確認'}</h1>
+          <h1>{title}</h1>
         </div>
 
         <div className="sheet__body">
@@ -70,8 +73,8 @@ export function ConfirmScreen({ lessonId, readOnly }: Props) {
                 予約する
               </Button>
             ) : (
-              <Button variant="outline" onClick={goHome}>
-                ホーム画面に戻る
+              <Button variant="outline" onClick={closeOverlay}>
+                閉じる
               </Button>
             )}
           </div>
@@ -82,8 +85,6 @@ export function ConfirmScreen({ lessonId, readOnly }: Props) {
           <p className="sheet__notice">{BOOKING_NOTICE}</p>
         </div>
       </div>
-
-      <div className="screen__tail" />
-    </div>
+    </Modal>
   )
 }

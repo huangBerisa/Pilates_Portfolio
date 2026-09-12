@@ -26,8 +26,8 @@ type BookingState = {
   /** カレンダーの表示開始週（日曜始まりではなく基準日始まり） */
   weekStart: string
   searchMode: SearchMode
-  /** 空 = すべて */
-  storeFilter: StoreId[]
+  /** 単一選択。null = すべての店舗 */
+  storeFilter: StoreId | null
   toast: string | null
 }
 
@@ -35,6 +35,8 @@ type BookingActions = {
   go: (nav: Nav) => void
   goHome: () => void
   goTab: (tab: TabName) => void
+  /** モーダルを閉じて直前のタブ画面に戻る */
+  closeOverlay: () => void
   /** Footer bar のハイライト。シート系の画面では直前のタブを維持する */
   activeTab: TabName
   openReserve: (date?: string) => void
@@ -44,8 +46,8 @@ type BookingActions = {
   setSelectedDate: (date: string) => void
   shiftWeek: (direction: 1 | -1) => void
   setSearchMode: (mode: SearchMode) => void
-  toggleStore: (id: StoreId) => void
-  clearStoreFilter: () => void
+  /** 店舗の絞り込み。null で「すべて」に戻す */
+  selectStore: (id: StoreId | null) => void
   showToast: (message: string) => void
   dismissToast: () => void
   isReserved: (lessonId: string) => boolean
@@ -64,7 +66,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     selectedDate: TODAY,
     weekStart: TODAY,
     searchMode: 'favorite',
-    storeFilter: [],
+    storeFilter: null,
     toast: null,
   })
 
@@ -102,6 +104,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     go,
     goHome: () => go({ screen: 'home' }),
     goTab: (tab) => go({ screen: tab }),
+    closeOverlay: () => setState((s) => ({ ...s, nav: { screen: s.lastTab } })),
     activeTab: isTab(state.nav.screen) ? state.nav.screen : state.lastTab,
     openReserve: (date) =>
       setState((s) => ({ ...s, nav: { screen: 'reserve' }, lastTab: 'reserve', selectedDate: date ?? s.selectedDate })),
@@ -130,12 +133,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         return { ...s, weekStart: iso, selectedDate: iso }
       }),
     setSearchMode: (mode) => patch({ searchMode: mode }),
-    toggleStore: (id) =>
-      setState((s) => ({
-        ...s,
-        storeFilter: s.storeFilter.includes(id) ? s.storeFilter.filter((x) => x !== id) : [...s.storeFilter, id],
-      })),
-    clearStoreFilter: () => patch({ storeFilter: [] }),
+    selectStore: (id) => patch({ storeFilter: id }),
     showToast,
     dismissToast: () => patch({ toast: null }),
     isReserved,
@@ -143,7 +141,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     isFull: state.reservations.length >= MAX_RESERVATIONS,
     lessonsOn: (date) =>
       LESSONS.filter((l) => l.date === date)
-        .filter((l) => state.storeFilter.length === 0 || state.storeFilter.includes(l.storeId))
+        .filter((l) => state.storeFilter === null || state.storeFilter === l.storeId)
         .sort((a, b) => a.start.localeCompare(b.start)),
   }
 
